@@ -29,11 +29,27 @@ if user_input:
     with st.chat_message('user'):
         st.write(user_input)
 
-    response = chatbot.invoke({'messages': [HumanMessage(content=user_input)]}, config =  CONFIG)
+    # response = chatbot.invoke({'messages': [HumanMessage(content=user_input)]}, config =  CONFIG)
 
-    ai_response = response['messages'][-1].content
+    # ai_response = response['messages'][-1].content
 
-    ## first add AI response to history
-    st.session_state['message_history'].append({'role':'assistant', 'content':ai_response})
+    # ## first add AI response to history
+    # st.session_state['message_history'].append({'role':'assistant', 'content':ai_response})
+
+    ## adding streaming functionality here so messages write in stream
     with st.chat_message('assistant'):
-        st.write(ai_response)
+
+        ## going to call function that streams response
+        ## st.write_stream() is streamlit functionality
+        ## chatbot.stream() is langgraph functionality
+        ## printing messages in streams and saving them
+        ai_message = st.write_stream(
+            message_chunk.content for message_chunk, metadata in
+              chatbot.stream(
+                  {'messages': [HumanMessage(content=user_input)]},
+                    config =  CONFIG,
+                    stream_mode = 'messages')
+
+        )
+    ## storing in session state
+    st.session_state['message_history'].append({'role':'assistant', 'content':ai_message})
