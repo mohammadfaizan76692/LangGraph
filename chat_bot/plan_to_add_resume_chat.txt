@@ -1,0 +1,19 @@
+# Adding a Side bar with title (fakeGPT) + Start chat button  + Recents
+
+# generating dynamic thread_id and adding it to the session
+
+# diplaying the thread_id in side-bar
+
+
+# on clicking a new chat open a new chat window
+    * generate a new thread_id
+    * save it in session
+    * reset message history
+
+# -> create a list to store all thread_ids
+    -> loading all the thread_ids in sidebar
+    -> convert the side bar text to clickable buttons
+
+
+# on clicking a particular thread_id load tha particular conversation
+
