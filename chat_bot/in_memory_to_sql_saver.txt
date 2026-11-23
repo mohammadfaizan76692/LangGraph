@@ -1,0 +1,9 @@
+
+## at backend Side
+1) pip install langgraph.checkpoint.sqlite
+
+2) using sqlite3 to creaete a prototype type 
+
+## at frontend side
+
+1) 
